@@ -1,0 +1,24 @@
+{
+  "name": "dunk",
+  "version": "1.0.0",
+  "description": "In memory database for javascript objects",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jessegreathouse/dunk.js.git"
+  },
+  "keywords": [
+    "javascript",
+    "object",
+    "database"
+  ],
+  "author": "jesse.greathouse@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jessegreathouse/dunk.js/issues"
+  },
+  "homepage": "https://github.com/jessegreathouse/dunk.js#readme"
+}
