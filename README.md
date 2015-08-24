@@ -3,7 +3,7 @@ Object database for storing and searching javascript objects in memory
 
 
 
-## Create the database through it's factory method:
+## Create the database through its factory method:
 
 ```javascript
 var DunkFactory = require('dunk');
