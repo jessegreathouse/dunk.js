@@ -59,8 +59,8 @@ Dunk.persist(testBird);
 Dunk.persist(testBird2);
 */
 
-var dog = Dunk.getRepository('Dog').findOneBy({'type': 'German Shepherd'});
-dog.name = "Shep";
+var dog = Dunk.getRepository('Dog').findOneBy({'type': 'Lab'});
+dog.name = "Shiner";
 
 var dogs = Dunk.getRepository('Dog').findAll();
 var cats = Dunk.getRepository('Cat').findAll();

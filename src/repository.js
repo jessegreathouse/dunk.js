@@ -1,6 +1,6 @@
 /**
  * repository
- * Package: test.js
+ * Package: dunk.js
  * Created: 8/21/15
  * Authors: jgreathouse
  */
@@ -90,10 +90,11 @@ function Repository() {
         for (var key in object) {
             if (object.hasOwnProperty(key)) {
                 setIndex(key, object[key], object._id);
-                //noinspection JSCheckFunctionSignatures
-                Object.observe(object, changeHandler);
             }
         }
+
+        //noinspection JSCheckFunctionSignatures
+        Object.observe(object, changeHandler);
 
         return collection[object._id] = object;
     };
@@ -110,6 +111,11 @@ function Repository() {
         indexes[key][value].push(id);
     };
 
+    /**
+     * getIndex
+     * @param key
+     * @returns {*}
+     */
     var getIndex = function (key) {
         if ('undefined' === typeof indexes[key]) {
             indexes[key] = [];
