@@ -1,12 +1,10 @@
 # Dunk.js
 Object database for storing and searching javascript objects in memory
 
-
-
 ## Create the database through its factory method:
 
 ```javascript
-var DunkFactory = require('dunk');
+var DunkFactory = require('dunkjs');
 
 var DunkConfig = {
     appKey:     'myApp',

@@ -1,5 +1,5 @@
 {
-  "name": "dunk",
+  "name": "dunkjs",
   "version": "1.0.0",
   "description": "In memory database for javascript objects",
   "main": "index.js",

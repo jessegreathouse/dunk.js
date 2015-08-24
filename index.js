@@ -1,6 +1,6 @@
 /**
  * index.js
- * Package: dunk.js
+ * Package: dunkjs
  * Created: 8/21/15
  * Authors: jgreathouse
  */
