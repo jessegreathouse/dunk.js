@@ -5,7 +5,7 @@
  * Authors: jgreathouse
  */
 var fs = require('fs');
-var Repository = require('./components/repository');
+var Repository = require('./repository');
 
 /**
  * Dunk

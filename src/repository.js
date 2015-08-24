@@ -19,14 +19,16 @@ function Repository() {
         for (var i = 0; i < changes.length; i++) {
             var change = changes[i];
             var object = change.object;
-            console.log(change);
             switch(change.type) {
+                case 'add':
+                    persist(object);
+                    break;
                 case 'update':
                     deleteIndex(change.name, change.oldValue, object._id);
                     persist(object);
                     break;
                 case 'delete':
-                    deleteAllIndexes(object._id);
+                    deleteIndex(change.name, change.oldValue, object._id);
                     break;
                 default:
                     console.log('unhandled event:' + change.type);
@@ -42,6 +44,7 @@ function Repository() {
     var initCollection = function(c) {
         for (var i in c) {
             if (c.hasOwnProperty(i)) {
+                //noinspection JSCheckFunctionSignatures
                 Object.observe(c[i], changeHandler);
             }
         }
@@ -123,7 +126,6 @@ function Repository() {
      */
     var deleteIndex = function (key, value, id) {
         var i = indexes[key][value].indexOf(id);
-        console.log(i);
         if (i > -1) {
             indexes[key][value].splice(i, 1);
         }
@@ -197,6 +199,7 @@ function Repository() {
         return assembleCollectionToList(list);
     };
 
+    //noinspection JSUnusedGlobalSymbols
     /**
      * public findOneBy
      * @param params
@@ -212,10 +215,26 @@ function Repository() {
     };
 
     /**
+     * public findAll
+     * @returns {*}
+     */
+    this.findAll = function() {
+        return Object.keys(collection).map(function(i) { return collection[i] });
+    };
+
+    /**
      * public persist
      */
     this.persist = function (object) {
         return persist(object);
+    };
+
+    /**
+     * public delete
+     */
+    this.delete = function (object) {
+        deleteAllIndexes(object._id);
+        delete collection[object._id];
     };
 
     /**
@@ -232,8 +251,10 @@ function Repository() {
      */
     this.setCollection = function(c) {
         collection = initCollection(c);
-        count = Object.keys(collection).length;
-        console.log('init count:' + count);
+        var keys = Object.keys(collection).map(Number).filter(function(a){
+            return isFinite(a) && collection[a];
+        });
+        count = Math.max.apply(Math, keys);
     };
 
     /**
