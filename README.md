@@ -73,6 +73,9 @@ var dog = Dunk.getRepository('Dog').findOneBy({'type': 'German Shepherd'});
 dog.name = "Shep";
 
 var dogs = Dunk.getRepository('Dog').findAll();
+
+console.log(dogs);
+
 ```
 output follows:
 
