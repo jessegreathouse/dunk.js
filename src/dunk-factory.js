@@ -6,6 +6,11 @@
  */
 var Dunk = require('./dunk');
 
+/**
+ * Dunk factory function
+ * @param config
+ * @returns {Dunk|exports|module.exports}
+ */
 module.exports = function (config) {
     return new Dunk(config);
 };

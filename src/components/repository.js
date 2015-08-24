@@ -11,6 +11,10 @@ function Repository() {
     var collection = {};
     var indexes = {};
 
+    /**
+     * changeHandler
+     * @param changes
+     */
     var changeHandler = function(changes) {
         for (var i = 0; i < changes.length; i++) {
             var change = changes[i];
@@ -30,6 +34,11 @@ function Repository() {
         }
     };
 
+    /**
+     * initCollection
+     * @param c
+     * @returns {*}
+     */
     var initCollection = function(c) {
         for (var i in c) {
             if (c.hasOwnProperty(i)) {
@@ -39,6 +48,12 @@ function Repository() {
         return c;
     };
 
+    /**
+     * intersect
+     * @param a
+     * @param b
+     * @returns {Array}
+     */
     var intersect = function(a, b) {
         var ai=0, bi=0;
         var result = [];
@@ -58,6 +73,11 @@ function Repository() {
         return result;
     };
 
+    /**
+     * persist
+     * @param object
+     * @returns {*}
+     */
     var persist = function (object) {
         if ('undefined' === typeof object._id) {
             count++;
@@ -75,6 +95,12 @@ function Repository() {
         return collection[object._id] = object;
     };
 
+    /**
+     * setIndex
+     * @param key
+     * @param value
+     * @param id
+     */
     var setIndex = function (key, value, id) {
         //create index if not already exists
         createIndex(key, value);
@@ -89,6 +115,12 @@ function Repository() {
         return indexes[key];
     };
 
+    /**
+     * deleteIndex
+     * @param key
+     * @param value
+     * @param id
+     */
     var deleteIndex = function (key, value, id) {
         var i = indexes[key][value].indexOf(id);
         console.log(i);
@@ -97,6 +129,10 @@ function Repository() {
         }
     };
 
+    /**
+     * deleteAllIndexes
+     * @param id
+     */
     var deleteAllIndexes = function (id) {
         for (var key in indexes) {
             if (indexes.hasOwnProperty(key)) {
@@ -109,6 +145,11 @@ function Repository() {
         }
     };
 
+    /**
+     * createIndex
+     * @param key
+     * @param value
+     */
     var createIndex = function(key, value) {
         if ('undefined' === typeof indexes[key]) {
             indexes[key] = {};
@@ -119,6 +160,11 @@ function Repository() {
         }
     };
 
+    /**
+     * assembleCollectionToList
+     * @param list
+     * @returns {Array}
+     */
     var assembleCollectionToList = function(list) {
         var result = [];
         for (var i=0; i < list.length; i++) {
@@ -127,6 +173,11 @@ function Repository() {
         return result;
     };
 
+    /**
+     * public findBy
+     * @param params
+     * @returns {Array}
+     */
     this.findBy = function(params) {
         var list = [];
         var empty_list = true;
@@ -146,6 +197,11 @@ function Repository() {
         return assembleCollectionToList(list);
     };
 
+    /**
+     * public findOneBy
+     * @param params
+     * @returns {*}
+     */
     this.findOneBy = function(params) {
         var list = this.findBy(params);
         if (list.length) {
@@ -155,24 +211,43 @@ function Repository() {
         }
     };
 
+    /**
+     * public persist
+     */
     this.persist = function (object) {
         return persist(object);
     };
 
+    /**
+     * public getCollection
+     * @returns {{}}
+     */
     this.getCollection = function() {
         return collection;
     };
 
+    /**
+     * public setCollection
+     * @param c
+     */
     this.setCollection = function(c) {
         collection = initCollection(c);
         count = Object.keys(collection).length;
         console.log('init count:' + count);
     };
 
+    /**
+     * public getIndexes
+     * @returns {{}}
+     */
     this.getIndexes = function() {
         return indexes;
     };
 
+    /**
+     * public setIndexes
+     * @param i
+     */
     this.setIndexes = function(i) {
         indexes = i;
     };

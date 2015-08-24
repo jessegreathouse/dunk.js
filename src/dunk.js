@@ -7,6 +7,11 @@
 var fs = require('fs');
 var Repository = require('./components/repository');
 
+/**
+ * Dunk
+ * @param config
+ * @constructor
+ */
 function Dunk(config) {
     'use strict';
 
@@ -21,12 +26,22 @@ function Dunk(config) {
         this.config[key] = config[key];
     }
 
+    /**
+     * provisionCachePath
+     * @param path
+     */
     var provisionCachePath = function(path) {
         if (!fs.existsSync(path)){
             fs.mkdirSync(path);
         }
     };
 
+    /**
+     * cacheFile
+     * @param object
+     * @param path
+     * @param file
+     */
     var cacheFile = function(object, path, file) {
         var cacheFile = path + '/' + file + '.repo';
         fs.open(cacheFile, 'w+', null, function (err, fd) {
@@ -39,11 +54,19 @@ function Dunk(config) {
         });
     };
 
+    /**
+     * getCachedRepositories
+     * @param cacheDir
+     */
     var getCachedRepositories = function(cacheDir)
     {
         return fs.readdirSync(cacheDir);
     };
 
+    /**
+     * initRepositories
+     * @param names
+     */
     var initRepositories = function(names) {
         for (var i = 0; i < names.length; i++) {
             if ('undefined' === typeof repositories[names[i]]) {
@@ -70,6 +93,11 @@ function Dunk(config) {
         }
     }
 
+    /**
+     * public getRepository
+     * @param key
+     * @returns {*}
+     */
     this.getRepository = function (key) {
         if ('undefined' === typeof repositories[key]) {
             repositories[key] = new Repository();
@@ -78,6 +106,11 @@ function Dunk(config) {
         return repositories[key];
     };
 
+    /**
+     * public persist
+     * @param object
+     * @param key
+     */
     this.persist = function (object, key) {
         if ('undefined' === typeof key || null === key) {
             key = object.constructor.name;
@@ -85,6 +118,9 @@ function Dunk(config) {
         return this.getRepository(key).persist(object);
     };
 
+    /**
+     * public flush
+     */
     this.flush = function(){
         var path = this.config.dataCache + '/' + this.config.appKey + '/';
         for (var name in repositories) {
