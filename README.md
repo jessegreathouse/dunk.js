@@ -48,6 +48,10 @@ Dunk.persist(testDog);
 Dunk.persist(testDog2, "Dog");
 ```
 
+## _id meta
+
+Dunk assigns an auto incremented _id field to each object in its repository. Currently only auto-increment integer ids are supported.
+
 ## Retrieving data
 Once data is persisted you can continue to 
 
