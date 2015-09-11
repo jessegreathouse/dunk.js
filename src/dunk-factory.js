@@ -12,5 +12,5 @@ var Dunk = require('./dunk');
  * @returns {Dunk|exports|module.exports}
  */
 module.exports = function (config) {
-    return new Dunk(config);
+  return new Dunk(config);
 };
